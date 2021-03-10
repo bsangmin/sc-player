@@ -7,6 +7,9 @@ import (
 	"runtime"
 )
 
+// VERSION is version
+var VERSION = "DEV"
+
 var typeFlag = flag.String("type", "gui", "type: gui, console, log")
 
 func init() {
@@ -20,6 +23,8 @@ func init() {
 }
 
 func main() {
+	log.Println("SC players VER: ", VERSION)
+
 	runtime.LockOSThread()
 	done := make(chan bool)
 

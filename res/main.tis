@@ -44,6 +44,7 @@ function setData() {
 
     var rst = view.plz();
 
+    setText("#version", " | " + rst["ver"]);
     setText("#title", rst["title"]);
     setText("#status", rst["status"]);
     

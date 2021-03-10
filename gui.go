@@ -77,6 +77,7 @@ func setEventHandler(w *window.Window) {
 		payload := sciter.NewValue()
 		playerSlice := sciter.NewValue()
 
+		payload.Set("ver", VERSION)
 		payload.Set("title", mapInfo.StringName())
 		payload.Set("scode", mapInfo.Status)
 		payload.Set("status", mapInfo.StringStatus())
