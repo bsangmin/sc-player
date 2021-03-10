@@ -1,0 +1,208 @@
+@const WINDOW-CAPTION-HEIGHT: window-caption-height;
+@const WINDOW-BUTTON-WIDTH: window-button-width;
+@const WINDOW-BUTTON-HEIGHT: window-button-height;
+
+html, body {
+    /* margin: 0; */
+    width: *;
+    height: *;
+}
+
+html {
+    background: transparent;
+    
+    var(my-green): rgb(170, 216, 95);
+    var(my-bule): rgb(34, 113, 204);
+    var(my-red): rgb(138, 7, 7);
+}
+
+body {
+    flow:horizontal;
+    font-family: system;
+    color:white;
+}
+
+.bg-image {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    
+    opacity: 0.6;
+    background-image:url(./background.png); 
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    
+    background-color: black;
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    width: *;
+    height: *; 
+}
+
+body > section {
+    padding-top: @WINDOW-CAPTION-HEIGHT; 
+}
+    
+
+
+.room {
+    flow:horizontal;
+    width: 100%;
+    /* height: 50px; */
+    font-size: large;
+    margin-bottom: 10px;
+}
+
+.room div {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+
+.wait-color {
+    color: color(my-bule);
+}
+
+.start-color {
+    color: color(my-green);
+}
+
+.end-color {
+    color: color(my-red)
+}
+
+#exp-area {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.exp {
+    display: inline-block
+}
+
+.color-exp {
+    width: 45px;
+    height: 20px;
+    font-size: 15px;
+    margin: 5px;
+    /* display: table-cell; */
+    vertical-align: middle;
+    display: inline-block
+}
+.host-color {
+    background: color(my-green);
+    color:rgb(29, 29, 29)
+}
+.me-color {
+    background: color(my-bule);
+    color:rgb(29, 29, 29)
+}
+.out-color {
+    background: color(my-red);
+}
+
+#players, .player {
+    width: 100%;
+}
+
+.player > div {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.player .num {
+    width: 40px;
+}
+
+.player .name, .player .ip {
+    width: 140px;
+}
+
+.player .ip .data{
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+}
+
+.player .bat {
+    width: 180px;
+}
+
+div.data {
+    padding: 0px 5px;
+    font-size: 15px;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.hide-player {
+    display: none;
+}
+
+.clickable:hover{
+    background: rgba(255, 255, 255, 0.445);
+    cursor: pointer;
+}
+
+#copy-box {
+    /* visibility: hidden; */
+
+    position: absolute;
+    z-index: 10;
+
+    width: 130px;
+    height: 30px;
+
+    text-align: center;
+    vertical-align: middle;
+
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+
+    border-radius: 10px;
+
+    background: rgb(103, 161, 248);
+
+    left: 50%;
+    bottom: 20px;
+
+    transform: translate(-50%, 0);
+}
+
+#copy-box[state=hidden] {
+    opacity: 0;
+}
+
+#copy-box[state=visible] {
+    opacity: 1;
+}
+
+
+html > header { position:fixed; top:0; left:0; right:0; height:window-caption-height; background: rgba(0, 0, 0, 0.548); }
+html > header { font:system; flow:horizontal; height:window-caption-height; margin:0;} 
+html > header > window-caption { display:block; line-height:window-caption-height; width:*; padding:0 1em; color: white; font-size: 15px }
+html > header > window-buttons { display:block; flow:horizontal; width:max-content; height:2em; }
+html > header > window-buttons > window-button { 
+        behavior:clickable; 
+        display:block; 
+        height:@WINDOW-BUTTON-HEIGHT; 
+        width:@WINDOW-BUTTON-WIDTH; 
+        foreground-size: 10dip;
+        foreground-repeat: no-repeat;
+        foreground-position:50% 50%;
+        stroke: #fff;
+        stroke-width:1dip;
+        transition: background-color linear 100ms;
+}
+html > header > window-buttons > window-button:hover { 
+    background:rgba(128,128,128,0.5); 
+}
+html > header > window-buttons > window-button[role="window-close"] { foreground-image: url(path:M0 0 L9 10 M9 0 L0 9); }
+html > header > window-buttons > window-button[role="window-close"]:hover { background:rgb(232,17,35); stroke:rgb(255, 255, 255); }
+html > header > window-buttons > window-button[role="window-maximize"] { foreground-image: url(path:M0 0 H9 V9 H0 Z); stroke: rgb(150,150,150) }
+html > header > window-buttons > window-button[role="window-minimize"] { foreground-image: url(path:M0 0 M0 4.5 H9 M9 9); }

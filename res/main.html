@@ -1,0 +1,39 @@
+<html window-frame="extended" window-blurbehind="auto" theme="dark">
+  <meta charset="UTF-8">
+  <style>
+    @import url(./main.css);
+  </style>
+  <script type="text/tiscript">
+    include "main.tis";    
+  </script>
+
+  <header>
+    <window-caption role=window-caption>SC players</window-caption>
+    <window-buttons>
+      <window-button role="window-minimize"></window-button>
+      <window-button role="window-maximize" disabled></window-button>
+      <window-button role="window-close"></window-button>
+    </window-buttons>
+  </header>
+
+<body>
+  <div.bg-image></div>
+  <section>
+    <div.room>
+      <div#status></div>    
+      <div.clickable#title>준비중...</div>    
+    </div>
+    <div#exp-area>
+      <div.exp><div.color-exp.host-color></div><div.color-exp>: Host</div></div>
+      <div.exp><div.color-exp.me-color></div><div.color-exp>: Me</div></div>
+      <div.exp><div.color-exp.out-color></div><div.color-exp>: Out</div></div>
+    </div>
+
+    <div#players>
+    </div>
+  </section>
+  <div#copy-box state="hidden">
+    <div.copy>복사완료!</div>
+  </div>
+</body>
+</html>

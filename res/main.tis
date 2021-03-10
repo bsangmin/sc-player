@@ -1,0 +1,124 @@
+const maxPlayers = 13
+
+event ready (evt) {
+    initPlayers();
+}
+
+event complete (evt) {
+    self.timer(500ms, function() {
+        setData();
+        return true;
+    });
+}
+
+event click $(div#.clickable) {
+
+    view.clipboard(#put, this.text);
+    glog("copy string " + this.text);
+
+    var box = $(#copy-box);
+    box.attributes["state"] = "visible";
+    box.timer(500ms, function() {
+        box.attributes["state"] = "hidden";
+    });
+
+    return true;
+}
+
+function initPlayers() {
+    self#players.clear();
+
+    for(var i=0; i<maxPlayers; i++) {
+    self#players.$append(<div.hide-player.player#p{i}>
+        <div.num><div.data></div></div>
+        <div.clickable.name><div.data></div></div>
+        <div.clickable.bat><div.data></div></div>
+        <div.clickable.ip><div.data></div></div>
+    </div>);
+    }
+    view.glog("init players")
+}
+
+function setData() {
+    view.glog("call plz");
+
+    var rst = view.plz();
+
+    setText("#title", rst["title"]);
+    setText("#status", rst["status"]);
+    
+    removeClass("#status", "end-color", "start-color", "wait-color");
+
+    var scode = rst["scode"];
+    if (scode === 1) {
+        addClass("#status", "wait-color");
+    }
+    else if (scode === 2) {
+        addClass("#status", "start-color");
+    }
+    else if (scode === 3) {
+        addClass("#status", "end-color");
+    }
+
+    //initPlayers();
+    var i = 0;
+    for(var p in rst["players"]) {
+        var ply = "#p" + i;
+        var numCss = ply + ">.num";
+
+        view.glog("set " + ply);
+
+        removeClass(numCss, "me-color", "out-color", "host-color");
+        if(p["me"]) {
+            addClass(numCss, "me-color");
+            // toggleClass(numCss, "me-color", true);
+        }
+        else if (p["out"]) {
+            addClass(numCss, "out-color");
+            // toggleClass(numCss, "out-color", true);
+        }
+        else if (p["num"] === 0) {
+            addClass(numCss, "host-color");
+            // toggleClass(numCss, "host-color", true);
+        }
+        
+        setText(numCss+">.data", p["num"]);
+        setText(ply+">.name>.data", p["name"]);
+        setText(ply+">.bat>.data", p["bat"]);
+        setText(ply+">.ip>.data", p["ip"]);
+
+        toggleClass(ply, "hide-player", false)
+
+        i++;
+    }
+
+    for(i; i<maxPlayers; i++) {
+        var ply = "#p" + i;
+        toggleClass(ply, "hide-player", true)
+    }
+}
+
+function setText(el, val) {
+    $({el}).text = val;
+}
+
+function toggleClass(el, cl, flag) {
+    $({el}).attributes.toggleClass(cl, flag)
+}
+
+function addClass(el, cls..) {
+    $({el}).attributes.addClass(..cls)
+}
+
+function removeClass(el, cls..) {
+    $({el}).attributes.removeClass(..cls)
+        
+}
+
+function msg(val) {
+    view.msgbox(#alert, val)
+}
+
+function glog(msg) {
+    view.glog(msg)
+}
