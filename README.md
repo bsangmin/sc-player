@@ -25,10 +25,10 @@ me <---6112/udp---> starcraft
 
 ## 사용 언어
 
-|-|Language|
-|---|---|
-|Controller|[Golang](https://golang.org/)|
-|GUI|[sciter(for Go)](https://sciter.com/)|
+|-|Language|Version|
+|---|---|---|
+|Backend|[Golang](https://golang.org/)|1.16|
+|Frontend|[sciter(for Go)](https://sciter.com/)|4.4.5.11|
 
 
 ## 코드 유의사항
