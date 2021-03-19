@@ -47,6 +47,7 @@ func initGui() {
 
 	rect := sciter.NewRect(y, x, ww, wh)
 	w, windowCreationErr := window.New(sciter.SW_MAIN|sciter.SW_GLASSY|sciter.SW_CONTROLS, rect)
+	w.SetTitle("sc-player")
 
 	if windowCreationErr != nil {
 		log.Fatalf("Could not create sciter window : %s",
@@ -82,10 +83,6 @@ func setEventHandler(w *window.Window) {
 		payload.Set("scode", mapInfo.Status)
 		payload.Set("status", mapInfo.StringStatus())
 
-		// players[0] = &structures.Player{
-		// 	Num: 0, Me: true, Out: false, Name: []byte("WWWWWWWWWWWWWWW"), Batcode: []byte("무지막지한무지#123456"), IP: net.IPv4(255, 255, 255, 255),
-		// }
-
 		for _, p := range players {
 			if p == nil || p.Name == nil || p.Batcode == nil || p.IP == nil {
 				continue
@@ -99,7 +96,12 @@ func setEventHandler(w *window.Window) {
 
 			player.Set("name", p.Name.ToString())
 			player.Set("bat", p.Batcode.ToString())
-			player.Set("ip", p.IP.String())
+
+			if VERSION == "DEV" {
+				player.Set("ip", p.IP.String())
+			} else {
+				player.Set("ip", p.HiddenIP().String())
+			}
 
 			playerSlice.Append(player)
 		}

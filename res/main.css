@@ -120,10 +120,10 @@ body > section {
     width: 140px;
 }
 
-.player .ip .data{
+/* .player .ip .data{
     filter: blur(3px);
     -webkit-filter: blur(3px);
-}
+} */
 
 .player .bat {
     width: 180px;

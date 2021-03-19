@@ -90,7 +90,7 @@ func scPacketFilter(ip4 *layers.IPv4, udp *layers.UDP, payload *gopacket.Payload
 					return
 				}
 
-				if player.Num == 0 && hostIP != nil {
+				if player.Num == 0 && hostIP != nil && !player.Me {
 					copy(player.IP, hostIP)
 					player.Flag = true
 					hostIP = nil

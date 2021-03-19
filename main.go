@@ -23,7 +23,7 @@ func init() {
 }
 
 func main() {
-	log.Println("SC players VER: ", VERSION)
+	log.Println("SC player VER:", VERSION)
 
 	runtime.LockOSThread()
 	done := make(chan bool)
