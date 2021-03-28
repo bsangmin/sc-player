@@ -1,0 +1,7 @@
+.vscode
+release
+*.syso
+*.exe
+*.mp4
+*.py
+*.zip

@@ -8,34 +8,42 @@ import (
 )
 
 // VERSION is version
+
+var PROG = "SC Player"
 var VERSION = "DEV"
 
-var typeFlag = flag.String("type", "gui", "type: gui, console, log")
+var typeFlag = flag.String("type", "overlay", "type: gui, console, overlay")
 
 func init() {
+	runtime.LockOSThread()
+
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 
 	flag.Parse()
 
-	if *typeFlag == "gui" {
+	if *typeFlag == "gui" || *typeFlag == "overlay" {
 		initGui()
 	}
 }
 
 func main() {
-	log.Println("SC player VER:", VERSION)
+	if VERSION != "DEV" {
+		log.SetOutput(ioutil.Discard)
+	}
 
-	runtime.LockOSThread()
+	// log.Println("SC player VER:", VERSION)
+	log.Printf("%s %s\n", PROG, VERSION)
+
 	done := make(chan bool)
 
 	go getPackets()
 
 	switch *typeFlag {
 	case "gui":
-		log.SetOutput(ioutil.Discard)
 		gui()
+	case "overlay":
+		overlay()
 	case "console":
-		log.SetOutput(ioutil.Discard)
 		console()
 	default:
 		<-done

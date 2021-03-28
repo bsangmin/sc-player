@@ -16,24 +16,25 @@
     </window-buttons>
   </header>
 
-<body>
+<body state="visible">
   <div.bg-image></div>
   <section>
-    <div.room>
-      <div#status></div>    
-      <div.clickable#title>준비중...</div>    
-    </div>
-    <div#exp-area>
-      <div.exp><div.color-exp.host-color></div><div.color-exp>: Host</div></div>
-      <div.exp><div.color-exp.me-color></div><div.color-exp>: Me</div></div>
-      <div.exp><div.color-exp.out-color></div><div.color-exp>: Out</div></div>
-    </div>
-
-    <div#players>
+    <div#container>
+      <div.room>
+        <div#status></div>    
+        <div.clickable#title>준비중...</div>    
+      </div>
+      <div#exp-area>
+        <div.exp><div.color-exp.host-color></div><div.color-exp>: Host</div></div>
+        <div.exp><div.color-exp.me-color></div><div.color-exp>: Me</div></div>
+        <div.exp><div.color-exp.out-color></div><div.color-exp>: Out</div></div>
+      </div>
+      <div#players></div>
     </div>
   </section>
   <div#copy-box state="hidden">
     <div.copy>복사완료!</div>
   </div>
+  <div#where></div>
 </body>
 </html>

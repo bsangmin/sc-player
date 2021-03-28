@@ -38,16 +38,18 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     
+    
     width: *;
     height: *; 
 }
 
 body > section {
-    padding-top: @WINDOW-CAPTION-HEIGHT; 
-}
+    /* width: 100%; */
     
-
-
+    padding-top: @WINDOW-CAPTION-HEIGHT; 
+    width: *;
+}
+ 
 .room {
     flow:horizontal;
     width: 100%;
@@ -175,13 +177,28 @@ div.data {
 }
 
 #copy-box[state=hidden] {
-    opacity: 0;
+    display: none;
 }
 
 #copy-box[state=visible] {
-    opacity: 1;
+    display: unset;
 }
 
+#where {
+    position: absolute;
+    z-index: 10;
+    
+    font-size: 15px;
+
+    right: 10px;
+    bottom: 10px;
+    
+    width: 300px;
+
+    text-align: right;
+
+    /* background: rgb(103, 161, 248); */
+}
 
 html > header { position:fixed; top:0; left:0; right:0; height:window-caption-height; background: rgba(0, 0, 0, 0.548); }
 html > header { font:system; flow:horizontal; height:window-caption-height; margin:0;} 

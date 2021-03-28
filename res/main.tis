@@ -1,11 +1,33 @@
 const maxPlayers = 13
 
 event ready (evt) {
-    initPlayers();
+    view.init();
+    glog("init sc player");
 }
 
 event complete (evt) {
-    self.timer(500ms, function() {
+    self.timer(10ms, function() {
+        var rst = view.refresh();
+        // return true
+
+        if(rst[0] == 0x0) {
+            view.windowTopmost = false;
+            view.windowState = View.WINDOW_HIDDEN
+        }
+
+        else if(rst[0] == 0x1) {
+            view.windowTopmost = true;
+            view.windowState = View.WINDOW_SHOWN
+            view.move(rst[1], rst[2]);
+        }
+        
+        else if(rst[0] == 0x2) {
+        }
+
+        return true;
+    });
+
+    self.timer(100ms, function() {
         setData();
         return true;
     });
@@ -22,29 +44,19 @@ event click $(div#.clickable) {
         box.attributes["state"] = "hidden";
     });
 
+    if(this.attributes.hasClass("ip")) {
+        view.where(this.text, function(rst) {
+            glog(rst)
+            setText("#where", rst)
+        });
+    }
+
     return true;
 }
 
-function initPlayers() {
-    self#players.clear();
-
-    for(var i=0; i<maxPlayers; i++) {
-    self#players.$append(<div.hide-player.player#p{i}>
-        <div.num><div.data></div></div>
-        <div.clickable.name><div.data></div></div>
-        <div.clickable.bat><div.data></div></div>
-        <div.clickable.ip><div.data></div></div>
-    </div>);
-    }
-    view.glog("init players")
-}
-
 function setData() {
-    view.glog("call plz");
-
     var rst = view.plz();
 
-    setText("#version", " | " + rst["ver"]);
     setText("#title", rst["title"]);
     setText("#status", rst["status"]);
     
@@ -61,26 +73,20 @@ function setData() {
         addClass("#status", "end-color");
     }
 
-    //initPlayers();
     var i = 0;
     for(var p in rst["players"]) {
         var ply = "#p" + i;
         var numCss = ply + ">.num";
 
-        view.glog("set " + ply);
-
         removeClass(numCss, "me-color", "out-color", "host-color");
         if(p["me"]) {
             addClass(numCss, "me-color");
-            // toggleClass(numCss, "me-color", true);
         }
         else if (p["out"]) {
             addClass(numCss, "out-color");
-            // toggleClass(numCss, "out-color", true);
         }
         else if (p["num"] === 0) {
             addClass(numCss, "host-color");
-            // toggleClass(numCss, "host-color", true);
         }
         
         setText(numCss+">.data", p["num"]);
